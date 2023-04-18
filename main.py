@@ -107,10 +107,14 @@ while True:
     for i in range(10):
         for j in range(10):
             if matrix[i][j]==1:
-                    rect_color = (255, 0, 0)
-                    rect_pos = (j*GRID_SIZE, i*GRID_SIZE)
+                    rect_color = (255, 255, 0)
+                    rect_pos = (j * GRID_SIZE, i * GRID_SIZE)
                     rect_size = (GRID_SIZE, GRID_SIZE)
-                    pygame.draw.rect(screen, rect_color, pygame.Rect(rect_pos, rect_size))
+                    image = pygame.image.load("images/snakeBody.png")
+                    image = pygame.transform.scale(image, rect_size)
+                    rect = pygame.Rect(rect_pos, rect_size)
+                    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(rect_pos, rect_size))
+                    screen.blit(image, rect)
             if matrix[i][j]==0:
                     rect_color = (255, 255,255)
                     rect_pos = (j*GRID_SIZE, i*GRID_SIZE)
@@ -120,7 +124,20 @@ while True:
                     rect_color = (255, 255, 0)
                     rect_pos = (j * GRID_SIZE, i * GRID_SIZE)
                     rect_size = (GRID_SIZE, GRID_SIZE)
-                    pygame.draw.rect(screen, rect_color, pygame.Rect(rect_pos, rect_size))
+                    image = pygame.image.load("images/fruit.png")
+                    image = pygame.transform.scale(image, rect_size)
+                    rect = pygame.Rect(rect_pos,rect_size)
+                    pygame.draw.rect(screen, (255,255,255), pygame.Rect(rect_pos, rect_size))
+                    screen.blit(image, rect)
+    drawHead=snake[-1]
+    rect_pos = (drawHead[1]  * GRID_SIZE, drawHead[0] * GRID_SIZE)
+    rect_size = (GRID_SIZE, GRID_SIZE)
+    image = pygame.image.load("images/snakeHead.png")
+    image = pygame.transform.scale(image, rect_size)
+    image =pygame.transform.rotate(image,((direction-3)%4)*90)
+    rect = pygame.Rect(rect_pos, rect_size)
+    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(rect_pos, rect_size))
+    screen.blit(image, rect)
     for i in range(1, SCREEN_WIDTH // GRID_SIZE):
         pygame.draw.line(screen, (0, 0, 0), (i * GRID_SIZE, 0), (i * GRID_SIZE, SCREEN_HEIGHT))
     for i in range(1, SCREEN_HEIGHT // GRID_SIZE):
